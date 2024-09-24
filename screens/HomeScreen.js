@@ -10,6 +10,7 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import { Card } from 'react-native-paper';
 import { EvilIcons } from '@expo/vector-icons';
@@ -17,7 +18,7 @@ import Constants from 'expo-constants';
 import axios from 'axios';
 
 import Loading from '../components/Loading';
-import {fetchMovies} from "../services/services";
+import { fetchMovies } from "../services/services";
 
 const screen = Dimensions.get('screen');
 
@@ -36,6 +37,14 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     setLoading(true);
     fetchMovies(searchTerm, movies).then((data) => {
+      console.log(data)
+      if(data.length === 0) {
+        Alert.alert('Request Failure','Movie Details not Found, Please try again..',[{text:"OK", onPress:() => {
+          setSearchTerm('')
+          setSearchNow(!searchNow)
+        }}],{ cancelable: false })
+        return
+      }
       setMovies(data);
       // set loading to false after movies are fetched.
       setLoading(false);

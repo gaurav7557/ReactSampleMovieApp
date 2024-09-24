@@ -14,8 +14,8 @@ const Loading = () => {
         backgroundColor: 'rgb(21,21,21)',
       }}>
       <ActivityIndicator size="small" color="#0000ff" />
-      <Text style={{ color: 'white', alignSelf: 'center' }}>
-        loading too long? setup api keys in config/const.js ...
+      <Text style={{ color: 'white', alignSelf: 'center', margin: 10 }}>
+        Loading Results Please Wait...
       </Text>
     </View>
   );

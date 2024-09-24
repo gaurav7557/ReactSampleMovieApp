@@ -36,6 +36,10 @@ export default function MovieScreen({ navigation, route }) {
      * which will return us the list of cast, crew, and director
      */
     fetchCredits(movie.id).then((data) => {
+      if(data === undefined || data.length === 0) {
+        Alert.alert('Request Failure','Movie Details not Found, Please try again..',[{text:"OK", onPress:() => navigation.pop()}],{ cancelable: false })
+        return
+      }
       setCredits(data.credits);
       setDirector(data.director);
       setLoading(false);
